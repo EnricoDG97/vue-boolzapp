@@ -5,6 +5,7 @@ createApp({
     return {
       // aggiungo indice contatto attivo e imposto default a 0
       activeContactIndex: 0,
+      newMessage: "",
       contacts: [
         {
           name: 'Michele',
@@ -167,13 +168,31 @@ createApp({
             }
           ],
         }
-      ]
+      ],
     };
   },
   methods: {
     // funzione per settare un indice al contatto attivo
     setActiveContact(index) {
       this.activeContactIndex = index;
+    },
+    // funzione per inviare un nuovo messaggio (oggetto)
+    sendNewMessage() {
+      this.contacts[this.activeContactIndex].messages.push({
+        date: "",
+        message: this.newMessage,
+        status: "sent",
+      });
+      // resetto il campo dopo il push
+      this.newMessage = '';
+      // setto un timeout di 1 secondo per l'invio di un messaggio automatico con classe/status received dopo aver inviato il primo messaggio - uso di arrow function per funzionare
+      setTimeout(() => {
+        this.contacts[this.activeContactIndex].messages.push({
+          date: "",
+          message: 'Ok',
+          status: 'received',
+        });
+      }, 1000);
     },
   },
 }).mount('#app');

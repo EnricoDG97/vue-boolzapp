@@ -208,7 +208,13 @@
                 <div class="right-footer-icon">
                     <i class="far fa-smile"></i>
                 </div>
-                <input class="new-message-inputs" placeholder="Scrivi un messaggio">
+                <!-- aggiungo v-model per poter scrivere e memorizzare un nuovo messaggio,
+                aggiungo poi un evento(funzione) keyup alla pressione di invio per pushare il nuovo oggetto messaggio nell'array messages -->
+                <input 
+                v-model="newMessage" 
+                class="new-message-inputs" 
+                placeholder="Scrivi un messaggio"
+                @keyup.enter="sendNewMessage">
                 <div class="right-footer-icon">
                     <i class="fa fa-microphone" aria-hidden="true"></i>
                 </div>
