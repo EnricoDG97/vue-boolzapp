@@ -264,6 +264,8 @@ body {
   background: #fff;
   border-radius: 10px;
   font-size: 15px;
+  /* "corretto" altezza massima messaggio */
+  max-height: 3rem;
 }
 
 .right .right-messages .message.received {

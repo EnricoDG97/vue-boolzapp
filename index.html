@@ -44,7 +44,9 @@
             </div>
             <div class="contacts">
                 <!-- ciclo per la visualizzazione di ogni contatto (oggetto) contenuto nell'array di oggetti contacts nel mio data -->
-                <div v-for="(contact, index) in contacts" :key="index" class="contact">
+                <!-- al click del contatto, ricordo un index e lo memorizzo selezionato, utile per milestone 2 -->
+                <div v-for="(contact, index) in contacts" :key="index" class="contact"
+                @click="setActiveContact(index)">
                     <div class="contact-logo">
                         <!-- immagine dinamica dell'avata: utilizzo template literal -->
                         <img :src=`assets/img/avatar${contacts[index].avatar}.jpg` alt="Avatar">
@@ -148,8 +150,10 @@
         <div class="right">
             <div class="header-right">
                 <div class="header-right-logo">
-                    <img src="assets/img/avatar_1.jpg" alt="">
-                    <h3><span id="header-right-contact-name">Michele</span> <br>
+                    <!-- src bind al contatto attivo (attivato precedentemente cliccando sul contatto) -->
+                    <img :src=`assets/img/avatar${contacts[activeContactIndex].avatar}.jpg` alt="">
+                    <!-- interpolazione per richiamare lo stesso nome del contatto attivo -->
+                    <h3><span id="header-right-contact-name">{{contacts[activeContactIndex].name}}</span> <br>
                         <small class="time">Ultimo accesso oggi alle 16:26</small>
                     </h3>
                 </div>
@@ -161,10 +165,15 @@
             </div>
             <div class="right-messages-container">
                 <div class="right-messages">
-                    <div class="message sent">
+                    <!-- assegnato un indice selezionato al contattato, seleziono e stampo ogni suo messaggio -->
+                    <!-- affido una classe dinamica per capire se il messaggio è stato inviato o ricevuto, andrà a destra o sinistra e cambierà colore -->
+                    <div v-for="(message, index) in contacts[activeContactIndex].messages" 
+                        :key="index" 
+                        class="message" 
+                        :class="message.status">
                         <div class="message-inner">
                             <span class="message-text">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat eos blanditiis architecto expedita aspernatur quasi, et nobis aut officiis soluta voluptates nesciunt voluptate ipsa fuga rerum doloribus, unde laboriosam doloremque?
+                                {{message.message}}
                             </span>
                             <div class="message-options">
                                 <i class="fa fa-chevron-down"></i>
@@ -176,7 +185,7 @@
                         </div>
                         <span class="message-time">16:13</span>
                     </div>
-                    <div class="message received">
+                    <!-- <div class="message received">
                         <div class="message-inner">
                             <span class="message-text">
                                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat eos blanditiis architecto expedita
@@ -193,7 +202,7 @@
                         </div>
                         <span class="message-time">16:15</span>
                     </div>
-                </div>
+                </div> -->
             </div>
             <div class="right-footer">
                 <div class="right-footer-icon">
