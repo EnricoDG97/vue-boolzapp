@@ -43,16 +43,19 @@
                     name="search">
             </div>
             <div class="contacts">
-                <div class="contact">
+                <!-- ciclo per la visualizzazione di ogni contatto (oggetto) contenuto nell'array di oggetti contacts nel mio data -->
+                <div v-for="(contact, index) in contacts" :key="index" class="contact">
                     <div class="contact-logo">
-                        <img src="assets/img/avatar_1.jpg" alt="Avatar Michele">
+                        <!-- immagine dinamica dell'avata: utilizzo template literal -->
+                        <img :src=`assets/img/avatar${contacts[index].avatar}.jpg` alt="Avatar">
                     </div>
                     <div class="contact-info">
                         <h3>
-                            <span class="contact-name">Michele</span>
+                            <!-- nome del contatto dinamico: uso interpolazione -->
+                            <span class="contact-name">{{contact.name}}</span>
                             <span class="time">16:15</span>
                         </h3>
-                        <small>Lorem ipsum dolor sit amet</small>
+                        <small>Ultimo messaggio visualizzato</small>
                     </div>
                 </div>
                 <!-- <div class="contact">
