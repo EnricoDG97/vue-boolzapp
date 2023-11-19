@@ -1,3 +1,6 @@
+const { DateTime } = luxon;
+const dt = luxon.DateTime;
+
 const { createApp } = Vue;
 
 createApp({
@@ -207,6 +210,27 @@ createApp({
     // funzione elimina il messaggio
     destroyMessage(contactIndex, messageIndex) {
       this.contacts[contactIndex].messages.splice(messageIndex, 1);
-    }
+    },
+    // funzione per trasformare il dato testuale in formato di data con luxon
+    dateToHourMin(fullDate) {
+      const luxonDate = dt.fromFormat(fullDate, "dd/MM/yyyy HH:mm:ss");
+      return luxonDate.toFormat("HH:mm");
+    },
+    // funzione per abbreviazione ultimo messaggio visualizzato nel contatto
+    abbreviateMessage(contact) {
+      const lastMessage = contact.messages[contact.messages.length - 1];
+      if (lastMessage) {
+          return lastMessage.message.length > 15 ? `${lastMessage.message.slice(0, 15)}...` : lastMessage.message;
+      }
+      return '';
+    },
+    // funzione per visualizzare l'orario dell'ultimo messaggio inviato
+    lastMessageTime(contact) {
+      const lastMessage = contact.messages[contact.messages.length - 1];
+      if (lastMessage) {
+          return this.dateToHourMin(lastMessage.date);
+      }
+      return '';
+    },
   },
 }).mount('#app');

@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="assets/css/mobile.css" media="screen and (max-width: 540px)">
     <!-- added vue cdn -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <!-- added Luxon via cdn-->
+    <script src="https://cdn.jsdelivr.net/npm/luxon@3.4.4/build/global/luxon.min.js"></script>
     <title>Boolzapp</title>
 </head>
 <body>
@@ -62,9 +64,13 @@
                         <h3>
                             <!-- nome del contatto dinamico: uso interpolazione -->
                             <span class="contact-name">{{contact.name}}</span>
-                            <span class="time">16:15</span>
+                            <span class="time">
+                                {{lastMessageTime(contact)}}
+                            </span>
                         </h3>
-                        <small>Ultimo messaggio visualizzato</small>
+                        <small>
+                            {{abbreviateMessage(contact)}}
+                        </small>
                     </div>
                 </div>
                 <!-- <div class="contact">
@@ -175,7 +181,7 @@
                     <!-- assegnato un indice selezionato al contattato, seleziono e stampo ogni suo messaggio -->
                     <!-- affido una classe dinamica per capire se il messaggio è stato inviato o ricevuto, andrà a destra o sinistra e cambierà colore -->
                     <div v-for="(message, index) in contacts[activeContactIndex].messages" 
-                        :key="index" 
+                        :key="message.date" 
                         class="message" 
                         :class="message.status">
                         <div class="message-inner">
@@ -193,7 +199,9 @@
                                 </div>
                             </div>
                         </div>
-                        <span class="message-time">16:13</span>
+                        <span class="message-time">
+                            {{dateToHourMin(message.date)}}
+                        </span>
                     </div>
                     <!-- <div class="message received">
                         <div class="message-inner">
@@ -233,9 +241,6 @@
         <!-- /contenitore dx -->
     </div>
     <!-- added link to js -->
-    <!-- <script src="assets/js/data.js"></script> -->
     <script src="assets/js/script.js"></script>
-    <!-- added Luxon -->
-    <script src="luxon.js"></script>
 </body>
 </html>
