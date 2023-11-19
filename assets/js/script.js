@@ -6,6 +6,8 @@ createApp({
       // aggiungo indice contatto attivo e imposto default a 0
       activeContactIndex: 0,
       newMessage: "",
+      // testo vuoto per la ricerca di un contatto 
+      searchText: "",
       contacts: [
         {
           name: 'Michele',
@@ -194,5 +196,13 @@ createApp({
         });
       }, 1000);
     },
+    // funzione di ricerca di un testo tra i contatti
+    researchContact() {
+      const searchedText = this.searchText.toLowerCase().trim();
+      this.contacts.forEach((contact) => {
+        const contactName = contact.name.toLowerCase();
+        contact.visible = contactName.includes(searchedText);
+      });
+    }
   },
 }).mount('#app');
