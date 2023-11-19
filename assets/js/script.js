@@ -203,6 +203,10 @@ createApp({
         const contactName = contact.name.toLowerCase();
         contact.visible = contactName.includes(searchedText);
       });
+    },
+    // funzione elimina il messaggio
+    destroyMessage(contactIndex, messageIndex) {
+      this.contacts[contactIndex].messages.splice(messageIndex, 1);
     }
   },
 }).mount('#app');
