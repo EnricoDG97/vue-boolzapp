@@ -53,7 +53,7 @@
                 <!-- ciclo per la visualizzazione di ogni contatto (oggetto) contenuto nell'array di oggetti contacts nel mio data -->
                 <!-- al click del contatto, ricordo un index e lo memorizzo selezionato, utile per milestone 2 -->
                 <div v-for="(contact, index) in contacts" :key="index" class="contact"
-                @click="setActiveContact(index)" v-show="contact.visible">
+                @click="setActiveContact(index)" v-show="contact.visible" :class="{active: activeContactIndex === index}">
                     <div class="contact-logo">
                         <!-- immagine dinamica dell'avata: utilizzo template literal -->
                         <img :src=`assets/img/avatar${contacts[index].avatar}.jpg` alt="Avatar">
