@@ -186,7 +186,7 @@ createApp({
     // funzione per inviare un nuovo messaggio (oggetto)
     sendNewMessage() {
       this.contacts[this.activeContactIndex].messages.push({
-        date: dt.now().toFormat("HH:mm"),
+        date: dt.now().toFormat("dd/MM/yyyy HH:mm:ss"),
         message: this.newMessage,
         status: "sent",
       });
@@ -195,7 +195,7 @@ createApp({
       // setto un timeout di 1 secondo per l'invio di un messaggio automatico con classe/status received dopo aver inviato il primo messaggio - uso di arrow function per funzionare
       setTimeout(() => {
         this.contacts[this.activeContactIndex].messages.push({
-          date: dt.now().toFormat("HH:mm"),
+          date: dt.now().toFormat("dd/MM/yyyy HH:mm:ss"),
           message: 'Ok',
           status: 'received',
         });
@@ -215,16 +215,16 @@ createApp({
     },
     // funzione per trasformare il dato testuale in formato di data con luxon
     dateToHourMin(fullDate) {
-      // const luxonDate = dt.fromFormat(fullDate, "dd/MM/yyyy HH:mm:ss");
-      // return luxonDate.toFormat("HH:mm"); 
-      let luxonDate;
-      if (DateTime.fromFormat(fullDate, "dd/MM/yyyy HH:mm:ss").isValid) {
-        luxonDate = DateTime.fromFormat(fullDate, "dd/MM/yyyy HH:mm:ss");
-        return luxonDate.toFormat("HH:mm");
-      } else {
-        const now = DateTime.now().toLocaleString(DateTime.TIME_24_SIMPLE);
-        return now;
-      }
+      const luxonDate = dt.fromFormat(fullDate, "dd/MM/yyyy HH:mm:ss");
+      return luxonDate.toFormat("HH:mm"); 
+      // let luxonDate;
+      // if (DateTime.fromFormat(fullDate, "dd/MM/yyyy HH:mm:ss").isValid) {
+      //   luxonDate = DateTime.fromFormat(fullDate, "dd/MM/yyyy HH:mm:ss");
+      //   return luxonDate.toFormat("HH:mm");
+      // } else {
+      //   const now = DateTime.now().toLocaleString(DateTime.TIME_24_SIMPLE);
+      //   return now;
+      // }
     },
     // funzione per abbreviazione ultimo messaggio visualizzato nel contatto
     abbreviateMessage(contact) {
