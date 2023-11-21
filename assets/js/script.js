@@ -232,7 +232,6 @@ createApp({
       if (lastMessage) {
           return lastMessage.message.length > 15 ? `${lastMessage.message.slice(0, 15)}...` : lastMessage.message;
       }
-      return '';
     },
     // funzione per visualizzare l'orario dell'ultimo messaggio inviato
     lastMessageTime(contact) {
@@ -240,7 +239,6 @@ createApp({
       if (lastMessage) {
           return this.dateToHourMin(lastMessage.date);
       }
-      return '';
     },
   },
 }).mount('#app');
