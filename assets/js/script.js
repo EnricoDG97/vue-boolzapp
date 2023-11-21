@@ -192,9 +192,10 @@ createApp({
       });
       // resetto il campo dopo il push
       this.newMessage = '';
+      const replyIndex = this.activeContactIndex;
       // setto un timeout di 1 secondo per l'invio di un messaggio automatico con classe/status received dopo aver inviato il primo messaggio - uso di arrow function per funzionare
       setTimeout(() => {
-        this.contacts[this.activeContactIndex].messages.push({
+        this.contacts[replyIndex].messages.push({
           date: dt.now().toFormat("dd/MM/yyyy HH:mm:ss"),
           message: 'Ok',
           status: 'received',
